@@ -1,0 +1,187 @@
+class Solution:
+    def candy(self, ratings: List[int]) -> int:
+        n = len(ratings)
+        candies = [1] * n 
+
+        for i in range(1, n):
+            if ratings[i] > ratings[i-1]:
+                candies[i] = candies[i-1] + 1
+
+        for i in range(n-2, -1, -1):
+            if ratings[i] > ratings[i+1]:
+                candies[i] = max(candies[i], candies[i+1] + 1)
+        
+        return sum(candies)
+func candy(ratings []int) int {
+    n := len(ratings)
+    candies := make([]int, n)
+    for i := range candies {
+        candies[i] = 1
+    }
+
+    for i := 1; i < n; i++ {
+        if ratings[i] > ratings[i-1] {
+            candies[i] = candies[i-1] + 1
+        }
+    }
+
+    for i := n - 2; i >= 0; i-- {
+        if ratings[i] > ratings[i+1] {
+            if candies[i] <= candies[i+1] {
+                candies[i] = candies[i+1] + 1
+            }
+        }
+    }
+
+    totalCandies := 0
+    for _, candy := range candies {
+        totalCandies += candy
+    }
+
+    return totalCandies
+}
+impl Solution {
+    pub fn candy(ratings: Vec<i32>) -> i32 {
+        let n = ratings.len();
+        let mut candies = vec![1; n];
+
+        for i in 1..n {
+            if ratings[i] > ratings[i - 1] {
+                candies[i] = candies[i - 1] + 1;
+            }
+        }
+
+        for i in (0..n - 1).rev() {
+            if ratings[i] > ratings[i + 1] {
+                candies[i] = std::cmp::max(candies[i], candies[i + 1] + 1);
+            }
+        }
+
+        candies.iter().sum()
+    }
+}
+class Solution {
+public:
+    int candy(std::vector<int>& ratings) {
+        int n = ratings.size();
+        std::vector<int> candies(n, 1);
+
+        for (int i = 1; i < n; ++i) {
+            if (ratings[i] > ratings[i - 1]) {
+                candies[i] = candies[i - 1] + 1;
+            }
+        }
+
+        for (int i = n - 2; i >= 0; --i) {
+            if (ratings[i] > ratings[i + 1]) {
+                candies[i] = std::max(candies[i], candies[i + 1] + 1);
+            }
+        }
+
+        int totalCandies = 0;
+        for (int candy : candies) {
+            totalCandies += candy;
+        }
+
+        return totalCandies;
+    }
+};
+class Solution {
+    public int candy(int[] ratings) {
+        int n = ratings.length;
+        int[] candies = new int[n];
+        Arrays.fill(candies, 1);
+
+        for (int i = 1; i < n; i++) {
+            if (ratings[i] > ratings[i - 1]) {
+                candies[i] = candies[i - 1] + 1;
+            }
+        }
+
+        for (int i = n - 2; i >= 0; i--) {
+            if (ratings[i] > ratings[i + 1]) {
+                candies[i] = Math.max(candies[i], candies[i + 1] + 1);
+            }
+        }
+
+        int totalCandies = 0;
+        for (int candy : candies) {
+            totalCandies += candy;
+        }
+
+        return totalCandies;
+    }
+}
+public class Solution {
+    public int Candy(int[] ratings) {
+        int n = ratings.Length;
+        int[] candies = new int[n];
+        Array.Fill(candies, 1);
+
+        for (int i = 1; i < n; i++) {
+            if (ratings[i] > ratings[i - 1]) {
+                candies[i] = candies[i - 1] + 1;
+            }
+        }
+
+        for (int i = n - 2; i >= 0; i--) {
+            if (ratings[i] > ratings[i + 1]) {
+                candies[i] = Math.Max(candies[i], candies[i + 1] + 1);
+            }
+        }
+
+        int totalCandies = 0;
+        foreach (int candy in candies) {
+            totalCandies += candy;
+        }
+
+        return totalCandies;
+    }
+}
+/**
+ * @param {number[]} ratings
+ * @return {number}
+ */
+var candy = function(ratings) {
+    const n = ratings.length;
+    const candies = new Array(n).fill(1);
+
+    for (let i = 1; i < n; i++) {
+        if (ratings[i] > ratings[i - 1]) {
+            candies[i] = candies[i - 1] + 1;
+        }
+    }
+
+    for (let i = n - 2; i >= 0; i--) {
+        if (ratings[i] > ratings[i + 1]) {
+            candies[i] = Math.max(candies[i], candies[i + 1] + 1);
+        }
+    }
+
+    return candies.reduce((a, b) => a + b, 0);
+};
+class Solution {
+
+    /**
+     * @param Integer[] $ratings
+     * @return Integer
+     */
+    function candy($ratings) {
+        $n = count($ratings);
+        $candies = array_fill(0, $n, 1);
+
+        for ($i = 1; $i < $n; $i++) {
+            if ($ratings[$i] > $ratings[$i - 1]) {
+                $candies[$i] = $candies[$i - 1] + 1;
+            }
+        }
+
+        for ($i = $n - 2; $i >= 0; $i--) {
+            if ($ratings[$i] > $ratings[$i + 1]) {
+                $candies[$i] = max($candies[$i], $candies[$i + 1] + 1);
+            }
+        }
+
+        return array_sum($candies);
+    }
+}
